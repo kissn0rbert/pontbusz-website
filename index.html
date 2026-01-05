@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PontBusz - Buszbérlés sofőrrel, reptéri transzfer, esküvői és céges buszbérlés. Megbízható utazás 8-55 fős klímás buszokkal.">
+    <title>PontBusz - Buszbérlés Sofőrrel | Reptéri Transzfer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #06b6d4;
+            --secondary: #14b8a6;
+            --accent: #0891b2;
+            --dark: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0e7490 0%, #06b6d4 50%, #14b8a6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: drift 30s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 10px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            background: #22d3ee;
+            color: #0f172a;
+            box-shadow: 0 10px 40px rgba(34, 211, 238, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(34, 211, 238, 0.6);
+        }
+
+        .section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 60px rgba(30, 64, 175, 0.15);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 1.9rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .fleet-card {
+            background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+            color: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(6, 182, 212, 0.3);
+            transition: all 0.3s;
+        }
+
+        .fleet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(6, 182, 212, 0.5);
+        }
+
+        .fleet-header {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .fleet-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .fleet-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .fleet-capacity {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        .fleet-features {
+            background: rgba(255,255,255,0.15);
+            padding: 30px 40px;
+        }
+
+        .fleet-features li {
+            padding: 10px 0;
+            font-size: 1.1rem;
+            list-style: none;
+        }
+
+        .section-blue {
+            background: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%);
+            color: white;
+            padding: 100px 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-box {
+            background: rgba(255,255,255,0.1);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .feature-box:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-box h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 45px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(30, 64, 175, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.7rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--secondary);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.3rem; }
+            .section-title { font-size: 2.3rem; }
+            .btn { padding: 16px 35px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PontBusz</h1>
+            <p class="hero-subtitle">Buszbérlés sofőrrel bármilyen alkalomra<br>Megbízható utazás 8-55 fős klímás buszokkal<br>Reptéri transzfer • Céges utak • Esküvők • Kirándulások</p>
+            <a href="#ajanlat" class="btn btn-primary">Kérjen Ajánlatot Most! →</a>
+        </div>
+    </section>
+
+    <section id="szolgaltatasok" class="section">
+        <h2 class="section-title">Szolgáltatásaink</h2>
+        <p class="section-subtitle">Professzionális buszos utaztatás minden célra – tapasztalt sofőrökkel, modern járművekkel</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🗺️</div>
+                <h3>Belföldi és Külföldi Buszbérlés</h3>
+                <p>Szervezett utazás Magyarországon és Európa bármely pontjára. Tapasztalt sofőrök, professzionális útvonaltervezés.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎒</div>
+                <h3>Kirándulások, Osztálykirándulások</h3>
+                <p>Iskolák, óvodák részére teljes körű utazásszervezés. Biztonságos, kényelmes, gyermekbarát járművek.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Céges Utak, Konferenciák</h3>
+                <p>Csapatépítők, céges rendezvények, konferenciák szállítása. Pontos időbeosztás, professzionális szolgáltatás.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💒</div>
+                <h3>Esküvői Buszbérlés</h3>
+                <p>Vendégek kényelmes szállítása esküvőkre és családi rendezvényekre. Elegáns járművek, megbízható szolgáltatás.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✈️</div>
+                <h3>Reptéri Transzfer</h3>
+                <p>Megbízható szállítás repülőterekre és vissza. Járatfigyelés, pontos időzítés, stresszmentes utazás.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚽</div>
+                <h3>Sportcsapatok Szállítása</h3>
+                <p>Csapatok, edzők, felszerelések biztonságos szállítása mérkőzésekre, edzőtáborokba. Rendszeres járatok is.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-blue">
+        <h2 class="section-title" style="color: white;">Miért Minket Válasszon?</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Több mint utazásszervezés – megbízható partner minden útjához</p>
+        
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon">✓</div>
+                <h4>Tapasztalt Sofőrök</h4>
+                <p>Profi, megbízható vezetők több évtizedes tapasztalattal</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🛡️</div>
+                <h4>Biztonság Mindenekelőtt</h4>
+                <p>Rendszeresen karbantartott, ellenőrzött járművek</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">❄️</div>
+                <h4>Klímás Buszok</h4>
+                <p>Minden járművünk légkondicionálóval felszerelt</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">💰</div>
+                <h4>Átlátható Árazás</h4>
+                <p>Nincs rejtett költség, egyértelmű ajánlatok</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">📞</div>
+                <h4>0-24 Elérhetőség</h4>
+                <p>Bármikor rendelkezésére állunk</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🎯</div>
+                <h4>Rugalmas Megoldások</h4>
+                <p>Egyedi igényekre szabott szolgáltatások</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="jarmupark" class="section">
+        <h2 class="section-title">Járműparkunk</h2>
+        <p class="section-subtitle">Modern, biztonságos buszok minden létszámhoz és alkalomhoz</p>
+
+        <div class="fleet-grid">
+            <div class="fleet-card">
+                <div class="fleet-header">
+                    <div class="fleet-icon">🚐</div>
+                    <h3>Kisbuszok</h3>
+                    <p class="fleet-capacity">8-20 férőhely</p>
+                </div>
+                <div class="fleet-features">
+                    <ul>
+                        <li>✓ Kisebb csoportoknak ideális</li>
+                        <li>✓ Légkondicionáló</li>
+                        <li>✓ Kényelmes ülések</li>
+                        <li>✓ Tágas csomagtartó</li>
+                        <li>✓ Reptéri transzferhez tökéletes</li>
+                        <li>✓ Városi és vidéki utak</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fleet-card">
+                <div class="fleet-header">
+                    <div class="fleet-icon">🚌</div>
+                    <h3>Midibuszok</h3>
+                    <p class="fleet-capacity">20-35 férőhely</p>
+                </div>
+                <div class="fleet-features">
+                    <ul>
+                        <li>✓ Közepes csoportoknak</li>
+                        <li>✓ Klímás, modern belső</li>
+                        <li>✓ Ergonomikus ülések</li>
+                        <li>✓ Nagy csomagtér</li>
+                        <li>✓ Céges utakhoz ajánlott</li>
+                        <li>✓ Esküvőkre kiváló választás</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fleet-card">
+                <div class="fleet-header">
+                    <div class="fleet-icon">🚍</div>
+                    <h3>Nagy Turistabuszok</h3>
+                    <p class="fleet-capacity">40-55 férőhely</p>
+                </div>
+                <div class="fleet-features">
+                    <ul>
+                        <li>✓ Nagy létszámú csoportoknak</li>
+                        <li>✓ Prémium légkondicionálás</li>
+                        <li>✓ Extra kényelmes ülések</li>
+                        <li>✓ Fedélzeti WC</li>
+                        <li>✓ WiFi és multimédia</li>
+                        <li>✓ Hosszú távú utazásokhoz</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ajanlat" class="cta-section">
+        <h2>Kérjen Ajánlatot Most!</h2>
+        <p>Ingyenes, gyors árajánlat 24 órán belül • Nincs kötelezettség</p>
+        <a href="tel:+36309376386" class="btn" style="background: white; color: var(--dark);">📞 +36 30 937 6386</a>
+        <p style="margin-top: 50px; font-size: 1.3rem; opacity: 0.95;">Adja meg ajánlatához:</p>
+        <p style="font-size: 1.2rem; margin-top: 15px;">📅 Dátum | 📍 Útvonal (honnan-hová) | 👥 Létszám | ⏰ Időpont</p>
+    </section>
+
+    <section id="kapcsolat" class="section">
+        <h2 class="section-title">Lépjen Kapcsolatba Velünk!</h2>
+        <p class="section-subtitle">Állunk rendelkezésére 0-24 órában • Hívjon, írjon vagy látogasson el hozzánk</p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h3>Telefonon</h3>
+                <a href="tel:+36309376386">+36 30 937 6386</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h3>E-mailben</h3>
+                <a href="mailto:info@pontbusz.hu">info@pontbusz.hu</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">🌐</div>
+                <h3>Weboldalunkon</h3>
+                <a href="https://www.pontbusz.hu" target="_blank">www.pontbusz.hu</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>PontBusz</strong> - Megbízható buszbérlés minden alkalomra</p>
+        <p>Telefon: +36 30 937 6386 | Email: info@pontbusz.hu</p>
+        <p style="margin-top: 30px;">&copy; 2026 PontBusz. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>
